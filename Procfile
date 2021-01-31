@@ -1,1 +1,1 @@
- web: gunicorn meteoserv.wsgi
+web: gunicorn meteoservice.wsgi
