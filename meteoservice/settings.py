@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 import django_heroku
-from pathlib import Path
+# from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,10 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'meteoservice',
-        'USER': 'bertha',
-        'PASSWORD': '557878ars',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        # 'USER': 'bertha',
+        # 'PASSWORD': '557878ars',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
@@ -132,4 +132,5 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# to automatically set a lot of configs
 django_heroku.settings(locals())
