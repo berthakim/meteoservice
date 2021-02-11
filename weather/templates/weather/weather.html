@@ -5,24 +5,44 @@
 <title>Map folium</title>
   <!-- <h2>Responsive Two Column Layout</h2>
   <p>Resize the browser window to see the responsive effect (the columns will stack on top of each other instead of floating next to each other, when the screen is less than 600px wide).</p> -->
-
-  <div class="row">
-    <div class="column col_left">
-      {{ my_map|safe }}
-    </div>
-    <div class="column col_right">
-        {% for i in lights %}
-          {% if i.month_int ==  today_month and i.day_int == today_day %}
-            <p><b>{{ i.month_str }} {{ i.day_int }}</b></p>
-            <p>Sunrise: {{ i.sunrise }}
-            </p>
-            <p>True Moon: {{ i.true_noon }}
-            </p>
-            <p>Sunset: {{ i.sunset }}
-            </p>
-          {% endif %}
-        {% endfor %}
-    </div>
+<div class="text">
+  <h2>Responsive Topnav Example</h2>
+  <p>Resize the browser window to see how it works.</p>
+</div>
+<div class="row">
+  <div class="column col_left text">
+    {{ my_map|safe }}
   </div>
+  <div class="column col_right text" style="background-color: #444444;">  <!-- #dddddd -->
+      {% for i in lights %}
+        {% if i.month_int ==  today_month and i.day_int == today_day %}
+          <p><b>{{ i.month_str }} {{ i.day_int }}</b></p>
+          <p>Sunrise: {{ i.sunrise }}
+          </p>
+          <p>True Moon: {{ i.true_noon }}
+          </p>
+          <p>Sunset: {{ i.sunset }}
+          </p>
+        {% endif %}
+      {% endfor %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="column col_left text">
+    <p>Расположение метеорологической станции в Якутске (Якутия, Россия):
+    широта 62.00 долгота 129.60 высота над уровнем моря 101 м. http://pogodaiklimat.ru/</p>
+
+    <p>Якутск climate summary
+    Якутск лежит на 133 м над уровнем моря В городе Якутск климат холодно умеренный. Якутск имеет значительное количество осадков в течение года. Это верно даже для сухого месяца. Климат здесь классифицируется как Dfb системой Кеппен-Гейгера. Средняя годовая температура составляет -10.2 °C в Якутск. Среднегодовая норма осадков - 246 mm.</p>
+
+    <p>Самый теплый месяц года - Июль со средней температурой 18.5 °C. Январь имеет самую низкую среднюю температуру года. Это -41.0 °C.</p>
+
+    <p>Разница между количеством осадков, между самым сухим и самым влажным месяцем - 34 mm. В течение года средняя температура колеблется от 59.5 °C. Полезные советы о чтении таблицы климата: За каждый месяц, вы найдете данные о осадках (мм), среднее, максимальное и минимальной температуры (в градусах по Цельсию и по Фаренгейту). Значение первой строки: (1) января (2) февраля (3) марта (4) апреля (5) мая, (6) июня (7) июля (8) августа (9) сентября , (10) октября (11) ноября (12) декабрь.<a href="https://ru.climate-data.org/%D0%B0%D0%B7%D0%B8%D1%8F/%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%D1%81%D0%BA%D0%B0%D1%8F-%D1%84%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F/%D1%80%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0-%D1%81%D0%B0%D1%85%D0%B0-%D1%8F%D0%BA%D1%83%D1%82%D0%B8%D1%8F/%D1%8F%D0%BA%D1%83%D1%82%D1%81%D0%BA-1806/#climate-table"link>Link</a></p>
+  </div>
+  <div class="column col_right">
+    {{ ploto }}
+  </div>
+</div>
 
 {% endblock content %}

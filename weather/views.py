@@ -8,6 +8,10 @@ import webbrowser
 import html
 from datetime import datetime
 
+# Import the necessary packages and modules
+import matplotlib.pyplot as plt
+import numpy as np
+
 # string represention of date
 timestamp = 1528797322
 date_time = datetime.fromtimestamp(timestamp).now()
@@ -48,7 +52,15 @@ def colourgrad(minimum, maximum, value):
     return hexcolour
 
 def weather_map(request):
-    m = folium.Map(location=[47.621, 2.4926], zoom_start=9)
+    # # Prepare the data
+    # x = np.linspace(0, 10, 100)
+    # # Plot the data
+    # plt.plot(x, x, label='linear')
+    # # Add a legend
+    # plt.legend()
+    # # Show the plot
+    # ploto = plt._repr_html_()
+
     # access to the data from DB (light and imgs_light)
     lights = Light.objects.all()
     # define the current date (day and month) for compare to the Light
@@ -56,6 +68,9 @@ def weather_map(request):
     today_day, today_month = today.day, today.month
     # today's date in str to show inside of the popups
     today_str = date_time.strftime("%d %B %Y")
+
+    # map
+    m = folium.Map(location=[47.621, 2.4926], zoom_start=9)
     for n in range(len(lons)-1):
         hcol = colourgrad(tmin, tmax, float(temps[n]))  # TODO: to delete?
         html=f'''
@@ -63,16 +78,10 @@ def weather_map(request):
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <h4><b>{wsnames[n]}</b></h4>
-        <p style="font-size:11pt;">{temps[n]} °C <i class="fas fa-sun" style="font-size:25px;color:black"></i> {desc[n]}</p>
+        <p style="font-size:11pt;">{temps[n]}°C <i class="fas fa-sun" style="font-size:25px;color:black"></i> {desc[n]}</p>
         <p style="font-size:11pt;">Pressure: {pres[n]}</p>
-        <p style="font-size:11pt;">Humidity: {humid[n]}</p>
+        <p style="font-size:11pt;">Humidity: {humid[n]}%</p>
         <p style="font-size:11pt;">Wind speed: {wind[n]} km/h</p>
-            <!-- fas fa-cloud, fas fa-cloud-meatball, fas fa-cloud-moon, fas fa-cloud-moon-rain-->
-            <!-- fab fa-cloudversify, fas fa-cloud-sun, fas fa-cloud-sun-rain -->
-            <!-- fas fa-cloud-rain, fas fa-cloud-showers-heavy -->
-            <!-- fas fa-sun -->
-            <!-- fas fa-wind -->
-
         '''
         iframe = folium.IFrame(html=html, width=250, height=230)
         popup = folium.Popup(iframe, min_width=100, max_width=2650)

@@ -7,6 +7,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  background-color: #333333;
 }
 
 /* Header/logo Title */
@@ -16,6 +17,7 @@ body {
   background: #222222;
   background-image: url('img.jpeg');
   color: white;
+  z-index: 2;
 }
 
 /* Increase the font size of the heading */
@@ -23,13 +25,18 @@ body {
   font-size: 20px;
 }
 
-/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. 
+It is positioned relative until a given offset position is met in the viewport - 
+then it "sticks" in place (like position:fixed). The sticky value is not supported in IE
+or Edge 15 and earlier versions. However, for these versions the navbar will inherit 
+default position */
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #222;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
+  z-index: 2;
 }
 
 /* Style the navigation bar links */
@@ -51,13 +58,14 @@ body {
 
 /* Active/current link */
 .navbar a.active {
-  background-color: #666;
+  background-color: #555;
   color: white;
 }
 
 /*++ from responsibe navbar*/
 .navbar .icon {
   display: none;
+  z-index: 2;
 }
 
 @media screen and (max-width: 600px) {
@@ -116,20 +124,12 @@ body {
 
 /* Footer */
 .footer {
-  margin-top:12px;
+  margin-top:20px;
   padding: 6px;
   text-align: center;
   color: grey;
-  background: #333333;
+  background: #222222;
 }
-/*------------------------*/
-/*footer*/
-/*.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-}*/
 /*------------------------*/
 /*weather html*/
 * {
@@ -152,15 +152,15 @@ body {
 }
 
 .col_left {
-  background-color: ;
+  /*background-color: ;*/
   border-radius: 20px;
 
   width: 60%;
 }
 .col_right {
-  background-color: #F1F1F1;
+  /*background-color: #F1F1F1;*/
   padding-left: 15px;
-  /*border-radius: 25px;*/
+  border-radius: 10px;
 
   width: 40%;
   }
@@ -170,4 +170,13 @@ body {
   .column {
     width: 100%;
   }
+}
+
+.text {
+  margin-top:15px;
+  text-align: justify;
+  color: #aaaaaa;
+  font-family: Helvetica, Times New Roman, Arial, serif;
+  font-size: 11pt;
+  line-height: 1.6;
 }
