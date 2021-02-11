@@ -8,16 +8,15 @@ import webbrowser
 import html
 from datetime import datetime
 
-# Import the necessary packages and modules
-import matplotlib.pyplot as plt
-import numpy as np
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
 
 # string represention of date
 timestamp = 1528797322
 date_time = datetime.fromtimestamp(timestamp).now()
 
 # weather from OpenWeatherMap api
-url = 'API-key'
+url = 'http://api.openweathermap.org/data/2.5/find?lat=47.5&lon=2.5&cnt=10&units=metric&appid=969bd7bdde2aa8690b83ebfa2b4056cb'
 
 stations = get(url).json()
 
@@ -52,14 +51,12 @@ def colourgrad(minimum, maximum, value):
     return hexcolour
 
 def weather_map(request):
-    # # Prepare the data
-    # x = np.linspace(0, 10, 100)
-    # # Plot the data
-    # plt.plot(x, x, label='linear')
-    # # Add a legend
-    # plt.legend()
-    # # Show the plot
-    # ploto = plt._repr_html_()
+    x_data = [0,1,2,3]
+    y_data = [x**2 for x in x_data]
+    plot_div = plot([Scatter(x=x_data, y=y_data,
+                        mode='lines', name='test',
+                        opacity=0.8, marker_color='green')],
+               output_type='div')
 
     # access to the data from DB (light and imgs_light)
     lights = Light.objects.all()
@@ -90,6 +87,6 @@ def weather_map(request):
                       popup = popup).add_to(m)
 
     m = m._repr_html_()
-    context = {'my_map': m, 'lights': lights, 'today_day': today_day, 'today_month': today_month, 'html': html}
+    context = {'my_map': m, 'lights': lights, 'today_day': today_day, 'today_month': today_month, 'html': html, 'plot_div': plot_div}
 
     return render(request, 'weather/weather.html', context)
