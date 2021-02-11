@@ -3,58 +3,26 @@
 {% block content %}
 
 <title>Map folium</title>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- <h2>Responsive Two Column Layout</h2>
+  <p>Resize the browser window to see the responsive effect (the columns will stack on top of each other instead of floating next to each other, when the screen is less than 600px wide).</p> -->
 
-<style>
-* {
-  box-sizing: border-box;
-}
-
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  /*width: 50%;*/
-  /*padding: 2px;*/
-  border-radius: 5px;
-  color: #bbb
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
-
-<h2>Two Equal Columns</h2>
-
-<div class="#" style="margin-top:50px;">
-<div class="row">
-  <div class="column" style="background-color:#343A40;width: 75%;padding: 2px;">
-    {{ my_map|safe }}
+  <div class="row">
+    <div class="column col_left">
+      {{ my_map|safe }}
+    </div>
+    <div class="column col_right">
+        {% for i in lights %}
+          {% if i.month_int ==  today_month and i.day_int == today_day %}
+            <p><b>{{ i.month_str }} {{ i.day_int }}</b></p>
+            <p>Sunrise: {{ i.sunrise }}
+            </p>
+            <p>True Moon: {{ i.true_noon }}
+            </p>
+            <p>Sunset: {{ i.sunset }}
+            </p>
+          {% endif %}
+        {% endfor %}
+    </div>
   </div>
-  <div class="column" style="background-color:#343A40;width: 25%;padding: 15pt;">
-	{% for i in lights %}
-		{% if i.month_int ==  today_month and i.day_int == today_day %}
-			<p><b>{{ i.month_str }} {{ i.day_int }}</b></p>
-			<p>Sunrise: {{ i.sunrise }}
-			</p>
-			<p>True Moon: {{ i.true_noon }}
-			</p>
-			<p>Sunset: {{ i.sunset }}
-			</p>
-		{% endif %}
-	{% endfor %}
-  </div>
-</div>
-</div>
-
 
 {% endblock content %}

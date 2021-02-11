@@ -13,7 +13,7 @@ timestamp = 1528797322
 date_time = datetime.fromtimestamp(timestamp).now()
 
 # weather from OpenWeatherMap api
-url = 'API key'
+url = 'http://api.openweathermap.org/data/2.5/find?lat=47.5&lon=2.5&cnt=10&units=metric&appid=969bd7bdde2aa8690b83ebfa2b4056cb'
 
 stations = get(url).json()
 
@@ -48,7 +48,7 @@ def colourgrad(minimum, maximum, value):
     return hexcolour
 
 def weather_map(request):
-    m = folium.Map(location=[47.5, 2.5], zoom_start=9)
+    m = folium.Map(location=[47.621, 2.4926], zoom_start=9)
     # access to the data from DB (light and imgs_light)
     lights = Light.objects.all()
     # define the current date (day and month) for compare to the Light
@@ -59,15 +59,14 @@ def weather_map(request):
     for n in range(len(lons)-1):
         hcol = colourgrad(tmin, tmax, float(temps[n]))  # TODO: to delete?
         html=f'''
-        {today_str}
+        <h5>{today_str}</h5>
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <h3>{wsnames[n]}</h3>
-        <p>{temps[n]} °C <i class="fas fa-sun" style="font-size:25px;color:black"></i> {desc[n]}</p>
-        <p>Pressure: {pres[n]}</p>
-        <p>Humidity: {humid[n]}</p>
-        <p>Wind speed: {wind[n]} km/h</p>
-
+        <h4><b>{wsnames[n]}</b></h4>
+        <p style="font-size:11pt;">{temps[n]} °C <i class="fas fa-sun" style="font-size:25px;color:black"></i> {desc[n]}</p>
+        <p style="font-size:11pt;">Pressure: {pres[n]}</p>
+        <p style="font-size:11pt;">Humidity: {humid[n]}</p>
+        <p style="font-size:11pt;">Wind speed: {wind[n]} km/h</p>
             <!-- fas fa-cloud, fas fa-cloud-meatball, fas fa-cloud-moon, fas fa-cloud-moon-rain-->
             <!-- fab fa-cloudversify, fas fa-cloud-sun, fas fa-cloud-sun-rain -->
             <!-- fas fa-cloud-rain, fas fa-cloud-showers-heavy -->
@@ -75,13 +74,13 @@ def weather_map(request):
             <!-- fas fa-wind -->
 
         '''
-        iframe = folium.IFrame(html=html, width=500, height=300)
-        popup = folium.Popup(iframe, max_width=2650)
+        iframe = folium.IFrame(html=html, width=250, height=230)
+        popup = folium.Popup(iframe, min_width=100, max_width=2650)
         folium.Marker([lats[n], lons[n]],
                       radius = 5,
                       popup = popup).add_to(m)
 
     m = m._repr_html_()
-    context = {'my_map': m, 'lights': lights, 'today_day': today_day, 'today_month': today_month}
+    context = {'my_map': m, 'lights': lights, 'today_day': today_day, 'today_month': today_month, 'html': html}
 
     return render(request, 'weather/weather.html', context)
