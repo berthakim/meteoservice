@@ -33,10 +33,9 @@
 </div>
 
 <div class="navbar" id="myNavbar">
-  <a href="#" class="active">Home</a>
-  <a href="#">Link</a>
-  <a href="#">Link</a>
-  <a href="#" class="right">Link</a>
+  <a class="nav-link {% block weather_active %}{% endblock %}" href="{% url 'weather-map' %}">Home</a>
+  <a class="nav-link {% block stats_active %}{% endblock %}" href="{% url 'meteo-stats' %}">Statistics</a>
+  <a class="nav-link {% block aleasmap_active %}{% endblock %}"href="{% url 'aleasmap' %}">Aleas Map</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>
     </a>

@@ -16,7 +16,7 @@ timestamp = 1528797322
 date_time = datetime.fromtimestamp(timestamp).now()
 
 # weather from OpenWeatherMap api
-url = 'http://api.openweathermap.org/data/2.5/find?lat=47.5&lon=2.5&cnt=10&units=metric&appid=969bd7bdde2aa8690b83ebfa2b4056cb'
+url = 'API_key'
 
 stations = get(url).json()
 
@@ -67,7 +67,7 @@ def weather_map(request):
     today_str = date_time.strftime("%d %B %Y")
 
     # map
-    m = folium.Map(location=[47.621, 2.4926], zoom_start=9)
+    m = folium.Map(location=[47.621, 2.4926], zoom_start=11)
     for n in range(len(lons)-1):
         hcol = colourgrad(tmin, tmax, float(temps[n]))  # TODO: to delete?
         html=f'''
