@@ -16,7 +16,7 @@ timestamp = 1528797322
 date_time = datetime.fromtimestamp(timestamp).now()
 
 # weather from OpenWeatherMap api
-url = 'API_key'
+url = 'API-key'
 
 stations = get(url).json()
 
