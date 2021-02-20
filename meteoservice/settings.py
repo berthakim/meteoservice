@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['meteoservice.herokuapp.com']
 
 INSTALLED_APPS = [
     'weather.apps.WeatherConfig',
+    'weather_js.apps.WeatherJsConfig',
     'meteostats.apps.MeteostatsConfig',
     'aleasmap.apps.AleasmapConfig',
     'django.contrib.admin',
@@ -83,8 +84,7 @@ WSGI_APPLICATION = 'meteoservice.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
     }
 }
 

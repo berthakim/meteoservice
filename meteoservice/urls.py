@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('weather.urls')),
+    path('weather/', include('weather_js.urls')),
     path('meteo-statistics/', include('meteostats.urls')),
     path('aleasmap/', include('aleasmap.urls')),
     ]
