@@ -2,47 +2,51 @@
 {% block weatherjs_active %}active{% endblock %}
 {% block content %}
 
-<title>Weather Map</title>
 <style>
-html {
+  .sidenav {
   height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  opacity: 80%;
 }
-html, body, #map {
-  height: 100%;
-}
-body {
-    padding: 0;
-    margin: 0;
+.cont {
+  padding: 30px 26px 6px 20px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
 }
 </style>
-<div id="map" class="leaflet-container leaflet-fade-anim" style="position: relative;" tabindex="0">
-  <div class="leaflet-map-pane" style="transform: translate3d(230px, 0px, 0px);">
-    <div class="leaflet-tile-pane">
-      <div class="leaflet-layer">
-        <div class="leaflet-tile-container"></div>
-      </div>
-    </div>
-  </div>
-  <div class="leaflet-control-container">
-    <div class="leaflet-sidebar left visible">
-      <div id="sidebar" class="leaflet-control">
-        <div id="info"><h3><i>Click on site to see the information about site</i></h3></div>
-  </div>
-  <div class="leaflet-top leaflet-right"></div>
-  <div class="leaflet-bottom leaflet-left"></div>
-  <div class="leaflet-bottom leaflet-right">
-  </div>
+
+<title>Weather Map</title>
+
+<div class="sidenav">
+  <div class="cont" id="info"><h3><i>Click on point to see more information</i></h3></div>
 </div>
-</div>
+<div id="map"></div>
+
+<!-- style="position: relative;width: 70%;" -->
+
 <script>
   var geojson = {
   "type":"FeatureCollection",
   "features":[
+  { "type": "Feature", "properties": { "lieu": "Test1", "imgy": "<i class=\"fa fa-sun-o\"style=\"font-size:55px;color:yellow\"></i>", "descr":"<p style=\"margin-top:20px;\">Archaeological excavations in the Sakha Republic (Yakutia) in North-Eastern Siberia have recovered the remains of 78 men, 51 of which were subjected to genetic analyses in previous studies focused on biogeographic</p>", "iframe3": "rien" }, "geometry": { "type": "Point", "coordinates": [ 14442232.880829565227032, 8865868.11990000680089 ] }},
   { "type": "Feature", "properties": { "lieu": "Vladimirovka I", "imgy": "{% for site in sites.all %}{% if site.id == 4 %}<img src=\"{{ site.site_logo.url }}\" style=\"height: 223px;\">{% else %}{% endif %}{% endfor %}", "descr":"<p style=\"margin-top:20px;\">Archaeological excavations in the Sakha Republic (Yakutia) in North-Eastern Siberia have recovered the remains of 78 men, 51 of which were subjected to genetic analyses in previous studies focused on biogeographic origins3 or kinship between graves4,5,6 using autosomal short tandem repeat (STR) and mitochondrial (HV1) data. Further studies of biogeographic origins also used Y-STR data7 and finally fragments of the genomes of smallpox8 and tuberculosis9 were amplified from some of the same subjects. Anthropological expeditions in Yakutia collected biological samples for more than 200 men, some also subjected to genetic analyses (Y-STR typing) aimed at identifying relationships between the Yakuts and other Siberian populations10. These published data (189 modern and 51 ancient males), along with newly collected and excavated material (77 modern and 23 ancient males), have allowed us to focus on the Y-chromosome lineages identified in the ancient and the modern data and propose a combined study of paleogenetic, historical and archaeological data, confronting different approaches in order to shed light on the evolution of cultural practices and social structure in the Yakut population during the last five centuries (source: URL: https://www.nature.com/articles/s42003-020-01307-3, 17/12/2020)</p>", "iframe3": "rien" }, "geometry": { "type": "Point", "coordinates": [ 14440232.880829565227032, 8864868.11990000680089 ] } },
   { "type": "Feature", "properties": { "lieu": "Orbit 18 km", "imgy": "{% for site in sites.all %}{% if site.id == 7 %}<img src=\"{{ site.site_logo.url }}\" style=\"height: 223px;\">{% else %}{% endif %}{% endfor %}", "descr":"<p style=\"margin-top:20px;\">Ancient Yakuts recovered from this large collection of graves are not representative of an ancient population. Uncommonly, we were also able to demonstrate that the funerary preference observed here involved three specific male lineages, especially in the 18th century. Moreover, this dominance was likely caused by the Russian conquest of Siberia which allowed some male clans to rise to new levels of power. Finally, we give indications that some mythical and historical figures might have been the actors of those genetic changes. These results help us reconsider the genetic dynamics of colonization in some regions, question the distinction between fact and myth in national histories and provide a rare insight into a funerary ensemble by revealing the biased process of its composition. (source: URL: https://www.nature.com/articles/s42003-020-01307-3, 17/12/2020))</p>", "iframe3": "rien" }, "geometry": { "type": "Point", "coordinates": [ 14441751.499910054728389, 8865568.682187795639038 ] } },
   { "type": "Feature", "properties": { "lieu": "Energetik II", "imgy": "{% for site in sites.all %}{% if site.id == 8 %}<img src=\"{{ site.site_logo.url }}\" style=\"height: 223px;\">{% else %}{% endif %}{% endfor %}", "descr":"<p style=\"margin-top:20px;\">Yakutia is inhabited by half a million Russians, half a million Yakuts (or Sakhas) and a few thousand members of ethnic minorities belonging mostly to the Tungus peoples, that occupied Yakutia centuries before the Yakut period1. Traditionally, Yakut culture depends on horse and cattle breeding, whereas the Tungus depend on hunting, gathering and reindeer-herding. In the early seventeenth century, Cossacks serving the Russian Empire reached Siberia and waged war against the Yakuts and Tungus, eventually defeating them and incorporating the region2. Christianisation followed the first contacts and neither the Bolshevik revolution nor the Second World War spared Yakutia. These events fundamentally altered certain cultural practices and caused major changes in demographic dynamics and the occupation of the territory. (source: URL: https://www.nature.com/articles/s42003-020-01307-3, 17/12/2020))</p>", "iframe3": "rien" }, "geometry": { "type": "Point", "coordinates": [ 14440963.808167312294245, 8865148.863544629886746 ] } }
   ]
 };
+
+window.onload = function() {
+  weatherBalloon( 6167865 );
+}
 
 var features = new ol.format.GeoJSON().readFeatures(geojson);
 
@@ -58,87 +62,49 @@ var myStyle = new ol.style.Style({
       })
     });
 
-/*for image raster*/
-var extent = [14435495.7, 8861886.6, 14447224.9, 8868386.9];   
-var projection = new ol.proj.Projection({
-  code: 'xkcd-image',
-  units: 'pixels',
-  extent: extent
-  });
 (function() {
     var map = new ol.Map({
         target: 'map',
         layers: [
-            new ol.layer.Group({
-                'title': 'Base maps',
-                layers: [
-                    new ol.layer.Group({
-                        title: 'Stamen WaterColor',
-                        type: 'base',
-                        combine: true,
-                        visible: false,
-                        layers: [
-                            new ol.layer.Tile({
-                                source: new ol.source.Stamen({
-                                    layer: 'watercolor'
-                                })
-                            }),
-                            new ol.layer.Tile({
-                                source: new ol.source.Stamen({
-                                    layer: 'terrain-labels'
-                                })
-                            })
-                        ]
-                    }),
-                    /*new ol.layer.Tile({
-                        title: 'Water color',
-                        type: 'base',
-                        visible: false,
+          new ol.layer.Group({
+            'title': 'Base maps',
+            layers: [
+              new ol.layer.Group({
+                  title: 'Stamen WaterColor',
+                  type: 'base',
+                  combine: true,
+                  visible: false,
+                  layers: [
+                    new ol.layer.Tile({
                         source: new ol.source.Stamen({
                             layer: 'watercolor'
                         })
-                    }),*/
-                    new ol.layer.Tile({
-                      title: 'CartoDB Light',
-                      type: 'base',
-                      visible: false,
-                      source: new ol.source.XYZ({
-                        url:'http://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-                        layer: 'CartoDB Dark'
-                      })
                     }),
                     new ol.layer.Tile({
-                        title: 'OSM',
-                        type: 'base',
-                        visible: true,
-                        source: new ol.source.OSM()
-                    })
-                ]
-            }),
-            new ol.layer.Group({
-                title: 'Overlays (à venir)',
-                layers: [
-                    /*new ol.layer.Image({
-                        title: 'Countries',
-                        source: new ol.source.ImageArcGISRest({
-                            ratio: 1,
-                            params: {'LAYERS': 'show:0'},
-                            url: "https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Countries_December_2016_Boundaries/MapServer"
+                        source: new ol.source.Stamen({
+                            layer: 'terrain-labels'
                         })
-                    }),*/
-                    /*new ol.layer.Image({
-                      title: 'Kernel Density',
-                      source: new ol.source.ImageStatic({
-                        url: 'kernel5000-EPSG4326.png',
-                        projection: projection,
-                        imageExtent: extent
-                      })
-                    })*/
-                    ]
+                    })]
+                  }),
+              new ol.layer.Tile({
+                  title: 'World Imagery',
+                  type: 'base',
+                  visible: false,
+                  source: new ol.source.XYZ({
+                    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+                    })
+                  }),
+              new ol.layer.Tile({
+                  title: 'OSM',
+                  type: 'base',
+                  visible: true,
+                  source: new ol.source.OSM()
                   })
-            ],
+            ]
+          }),
+        ],
         view: new ol.View({
-            center: [14432232.880829565227032, 8864868.11990000680089],
+            center: [14432232.88, 8864868.11],
             zoom: 12
         })
     });
@@ -148,8 +114,8 @@ var projection = new ol.proj.Projection({
     });
     map.addControl(layerSwitcher);
 
-    /*var fullscreen = new ol.control.FullScreen();
-    map.addControl(fullscreen);*/
+    var fullscreen = new ol.control.FullScreen();
+    map.addControl(fullscreen);
 
     var scaleline = new ol.control.ScaleLine();
     map.addControl(scaleline);
@@ -192,8 +158,5 @@ map.addLayer(vectorLayer);
 
 })();
 </script>
-<!-- code source : https://www.w3scohols.com/howto/howto_css_example_website.asp -->
-<!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_example_website
-  http://turbo87.github.io/leaflet-sidebar/examples/ -->
 
 {% endblock content %}

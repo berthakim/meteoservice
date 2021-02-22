@@ -17,7 +17,6 @@ date_time = datetime.fromtimestamp(timestamp).now()
 
 # weather from OpenWeatherMap api
 url = 'API-key'
-
 stations = get(url).json()
 
 temps, pres, humid, wind, desc, icon = [], [], [], [], [], []
@@ -75,7 +74,7 @@ def weather_map(request):
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <h4><b>{wsnames[n]}</b></h4>
-        <p style="font-size:11pt;">{temps[n]}°C <i class="fas fa-sun" style="font-size:25px;color:black"></i> {desc[n]}</p>
+        <p style="font-size:11pt;">{temps[n]}°C<i class="fas fa-sun" style="font-size:25px;color:black"></i>{desc[n]}</p>
         <p style="font-size:11pt;">Pressure: {pres[n]}</p>
         <p style="font-size:11pt;">Humidity: {humid[n]}%</p>
         <p style="font-size:11pt;">Wind speed: {wind[n]} km/h</p>

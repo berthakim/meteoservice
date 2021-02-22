@@ -14,8 +14,8 @@ body {
 .header {
   padding: 10px;
   text-align: center;
-  background: #222222;
-  background-image: url('img.jpeg');
+  background: #111111;
+  /*background-image: url('img.jpeg');*/
   color: white;
   z-index: 2;
 }

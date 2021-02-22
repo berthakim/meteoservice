@@ -1,0 +1,45 @@
+/*.map {
+  position: relative;
+}
+  * {
+  box-sizing: border-box;
+}
+
+.iframe {
+  border:none;
+} */
+.ol-scale-line {
+  top: auto;
+  left: auto;
+  bottom: auto;
+} 
+.ol-zoom {
+  top:5em;
+  left: auto;
+  bottom: auto;
+}
+.ol-full-screen {
+  top: 8em;
+  left: auto;
+  bottom: auto;
+}
+.layer-switcher {
+  position: absolute;
+  left: auto;
+  text-align: left;
+  bottom: auto;
+}
+
+.ol-attribution.ol-uncollapsible {
+    bottom: 0.;
+    right: 0;
+    border-radius: 4px 0 0;
+    height: 1.5em;
+    line-height: 1em;
+}
+.ol-attribution:not(.ol-collapsed) {
+    background: rgba(255,255,255,.8);
+}
+.ol-attribution ul {
+    font-size: 9pt;
+  }
